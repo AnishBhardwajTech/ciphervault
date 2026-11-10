@@ -43,11 +43,8 @@ jobs:
           python-version: "3.12"
           cache: pip
       - name: Install Microsoft ODBC Driver 18
+        # The runner image already has Microsoft's apt repository configured.
         run: |
-          curl -fsSL https://packages.microsoft.com/keys/microsoft.asc | sudo gpg --dearmor -o /usr/share/keyrings/microsoft.gpg
-          . /etc/os-release
-          echo "deb [arch=amd64 signed-by=/usr/share/keyrings/microsoft.gpg] https://packages.microsoft.com/ubuntu/${VERSION_ID}/prod ${VERSION_CODENAME} main" \
-            | sudo tee /etc/apt/sources.list.d/mssql-release.list
           sudo apt-get update
           sudo ACCEPT_EULA=Y apt-get install -y msodbcsql18 unixodbc-dev
       - run: pip install -r requirements-dev.txt
