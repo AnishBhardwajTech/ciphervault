@@ -1,0 +1,2 @@
+cryptography>=42
+pyodbc>=5.1  # only needed for MS SQL Server
